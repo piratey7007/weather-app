@@ -102,6 +102,7 @@ export type WeatherData = {
     temp_max: number;
     temp_min: number;
   };
+  temp: (symbol: string) => string;
   wind: {
     speed: number;
     deg: number;
@@ -114,6 +115,6 @@ export type WeatherData = {
 
 export type Location = {
   city: string;
-  state: string;
-  country: string;
+  state?: string;
+  country?: string;
 };

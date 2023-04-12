@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useWeather } from "../contexts/LocalContext";
+import { useForecast } from "../contexts/LocalContext";
 
-export default function Weather() {
+export default function Forecast() {
   const { city, state, country } = useParams();
   const [location, setLocation] = useState(
     city ? { city, state, country } : undefined,
@@ -12,7 +12,7 @@ export default function Weather() {
       setLocation({ city, state, country });
     }
   }, [city, state, country]);
-  const { data, loading, error } = useWeather(location);
+  const { data, loading, error } = useForecast(location);
 
   if (location)
     return (
@@ -23,13 +23,7 @@ export default function Weather() {
           {data?.state ? `, ${data?.state}` : ""}
           {data?.country ? `, ${data?.country}` : ""}
         </h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <p>
-            {data?.temp("f")}, {data?.weather[0].description}
-          </p>
-        )}
+        {loading ? <p>Loading...</p> : <p>data here?</p>}
       </div>
     );
   return <div>Weather</div>;
