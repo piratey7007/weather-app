@@ -1,10 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useWeather } from "../contexts/LocalContext";
-import Icon from "../assets/WeatherIcons/Icon";
+import Icon from "../assets/Icon";
 
 export default function Weather() {
-  const { city, state, country } = useParams();
+  const [params] = useSearchParams();
+  const city = params.get("city") || undefined,
+    state = params.get("state") || undefined,
+    country = params.get("country") || undefined;
+
   const [location, setLocation] = useState(
     city ? { city, state, country } : undefined,
   );
@@ -33,9 +37,5 @@ export default function Weather() {
         )}
       </div>
     );
-  return (
-    <>
-      <Icon className="w-full" mist />
-    </>
-  );
+  return <></>;
 }

@@ -35,6 +35,7 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         if (!input) return;
         setLoading(true);
         const data = await getWeatherData(input);
+        if (!data) return;
         const location = await getLocation({
           coords: { lat: data.coord.lat, lon: data.coord.lon },
         });

@@ -14,13 +14,16 @@ export async function getWeatherData({ city, state, country }: Location) {
       import.meta.env.VITE_WEATHER_API_KEY
     }`,
   );
-  const json: OpenWeatherResponse = await res.json();
-  return {
-    weather: json.weather,
-    main: json.main,
-    wind: json.wind,
-    coord: json.coord,
-  };
+  if (res.ok && res.json) {
+    const json: OpenWeatherResponse = await res.json();
+    if (!json) return;
+    return {
+      weather: json.weather,
+      main: json.main,
+      wind: json.wind,
+      coord: json.coord,
+    };
+  }
 }
 
 export async function getForecastData({
@@ -68,8 +71,8 @@ export async function getLocation({
           `https://nominatim.openstreetmap.org/search?q=${city}&format=jsonv2&addressdetails=1`,
         )
       : "";
-  if (!res) return;
-  const json: NominatimResponse = (await res.json())[0];
+  if (!res || !res.ok || !res.json) return;
+  const json: NominatimResponse = await res.json();
   return {
     city: json.address.city,
     state: json.address.state,

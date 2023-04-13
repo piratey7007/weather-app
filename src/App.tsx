@@ -18,14 +18,7 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Navigate to="/weather" replace />} />
         <Route path="about" element={<About />} />
-        <Route index path="weather" element={<Weather />} />
-        <Route path="weather/:city" element={<Weather />} />
-        <Route path="weather/:city/:state" element={<Weather />} />
-        <Route path="weather/:city/:state/:country" element={<Weather />} />
-        <Route path="forecast" element={<Forecast />} />
-        <Route path="forecast/:city" element={<Forecast />} />
-        <Route path="forecast/:city/:state" element={<Forecast />} />
-        <Route path="forecast/:city/:state/:country" element={<Forecast />} />
+        <Route path="weather" element={<Weather />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -1,9 +1,9 @@
-import Cloud from "../Cloud";
-import Lightning from "../Lightning";
-import Orb from "../Orb";
-import Rain from "../Rain";
-import Snow from "../Snow";
-import Mist from "../Mist";
+import Cloud from "./Cloud";
+import Lightning from "./Lightning";
+import Orb from "./Orb";
+import Rain from "./Rain";
+import Snow from "./Snow";
+import Mist from "./Mist";
 
 const Snowy = () => {
   return (
@@ -53,7 +53,7 @@ export default function Icon({
   }
   if (rain && snow) rain = false;
   return (
-    <div className={className + " relative aspect-square bg-black"}>
+    <div className={className + " relative aspect-square"}>
       {orb ? (
         clouds ? (
           <>
