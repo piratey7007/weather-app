@@ -3,6 +3,8 @@ import Lightning from "../Lightning";
 import Orb from "../Orb";
 import Rain from "../Rain";
 import Snow from "../Snow";
+import Mist from "../Mist";
+
 const Snowy = () => {
   return (
     <div className="absolute bottom-[4%] left-[-25%] right-0 z-10 mx-auto flex h-[40%] w-2/3 flex-col gap-4">
@@ -27,6 +29,7 @@ const Snowy = () => {
     </div>
   );
 };
+
 export default function Icon({
   className = "",
   rain = false,
@@ -34,10 +37,21 @@ export default function Icon({
   orb = true,
   clouds = false,
   snow = false,
+  mist = false,
 }) {
-  if (rain || lightning || snow) clouds = true;
+  if (rain || lightning || snow || mist) {
+    if (!clouds) {
+      clouds = true;
+      console.log("Clouds must be present for rain, lightning, snow, or mist.");
+    }
+  }
+  if (rain || lightning || snow) {
+    if (mist) {
+      mist = false;
+      console.log("Mist cannot be present with rain, lightning, snow.");
+    }
+  }
   if (rain && snow) rain = false;
-  console.log({ rain, lightning, orb, clouds, snow });
   return (
     <div className={className + " relative aspect-square bg-black"}>
       {orb ? (
@@ -49,7 +63,7 @@ export default function Icon({
             <Cloud className="absolute left-0 right-0 top-[1/5] mx-auto w-2/3" />
           </>
         ) : (
-          <Orb className="absolute right-0 top-0 w-1/2" />
+          <Orb className="absolute left-0 right-0 top-[10%] mx-auto w-1/2" />
         )
       ) : (
         <>
@@ -77,6 +91,8 @@ export default function Icon({
         )
       ) : lightning ? (
         <Lightning className="absolute bottom-[17%] left-[-5%] right-0 mx-auto h-[25%] w-2/3" />
+      ) : mist ? (
+        <Mist className="absolute bottom-[0%] left-[0%] right-0 z-10 mx-auto w-3/5" />
       ) : null}
     </div>
   );

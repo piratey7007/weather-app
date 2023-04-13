@@ -35,7 +35,7 @@ export default function Weather() {
     );
   return (
     <>
-      <Icon className="w-full" snow />
+      <Icon className="w-full" mist />
     </>
   );
 }

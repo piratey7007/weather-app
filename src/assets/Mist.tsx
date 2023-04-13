@@ -7,7 +7,6 @@ export default function Mist({ className = "" }) {
       xmlns="http://www.w3.org/2000/svg"
       className={`${className}`}
     >
-      <rect width="500" height="500" fill="black" />
       <path
         d="M67 195H324"
         stroke="white"
