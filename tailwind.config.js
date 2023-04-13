@@ -2,7 +2,12 @@
 export default {
   content: ["./src/**/*.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ["Nunito Mono", "sans-serif"],
+        display: ["Ubuntu Mono", "sans-serif"],
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-fluid-typography")],
 };

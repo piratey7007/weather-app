@@ -147,3 +147,39 @@ export function useForecast(location?: Location) {
   }, [location]);
   return context;
 }
+
+type DayNightContextT = {
+  isDay: boolean;
+  getTime: () => string;
+};
+
+export const DayNightContext = createContext({} as DayNightContextT);
+
+export function DayNightProvider({ children }: { children: ReactNode }) {
+  const [isDay, setIsDay] = useState(true);
+
+  useEffect(() => {
+    const time = new Date().getHours();
+    if (time > 6 && time < 18) setIsDay(true);
+    else setIsDay(false);
+  }, []);
+
+  return (
+    <DayNightContext.Provider
+      value={{
+        isDay,
+        getTime: () => {
+          const time = new Date().getHours();
+          if (time > 6 && time < 18) return "day";
+          return "night";
+        },
+      }}
+    >
+      {children}
+    </DayNightContext.Provider>
+  );
+}
+
+export function useDayNight() {
+  return useContext(DayNightContext);
+}

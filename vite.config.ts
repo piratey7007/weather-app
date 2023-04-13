@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwind from "tailwindcss";
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
@@ -9,6 +10,11 @@ export default defineConfig(async () => ({
   // prevent vite from obscuring rust errors
   clearScreen: false,
   // tauri expects a fixed port, fail if that port is not available
+  css: {
+    postcss: {
+      plugins: [tailwind],
+    },
+  },
   server: {
     port: 1420,
     strictPort: true,

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useWeather } from "../contexts/LocalContext";
+import Icon from "../assets/WeatherIcons/Icon";
 
 export default function Weather() {
   const { city, state, country } = useParams();
@@ -32,5 +33,9 @@ export default function Weather() {
         )}
       </div>
     );
-  return <div>Weather</div>;
+  return (
+    <>
+      <Icon className="w-full" snow />
+    </>
+  );
 }
