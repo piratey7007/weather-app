@@ -8,10 +8,18 @@ function sleep(ms: number) {
 export default function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [className, setClassName] = useState("");
+  const [className, setClassName] = useState({
+    ul: "",
+    main: "flex justify-center items-center w-24",
+    mid: "text-xl opacity-100",
+    subst: "opacity-50 text-base",
+    suben: "opacity-50 text-base",
+    outst: "opacity-0",
+    outen: "opacity-0",
+  });
   const [direction, setDirection] = useState<"left" | "right">();
 
-  function handleClick(
+  async function handleClick(
     e: React.MouseEvent<HTMLAnchorElement>,
     direction?: "left" | "right",
   ) {
@@ -20,76 +28,91 @@ export default function Nav() {
     if (!direction) return;
     const path = e.currentTarget.getAttribute("href")!;
     navigate(path);
+    if (direction) {
+      setClassName({
+        ul: direction === "left" ? "translate-x-24" : "-translate-x-24",
+        main: "flex justify-center items-center w-24",
+        mid: "text-base opacity-50",
+        subst: "opacity-0 text-base",
+        suben: "opacity-100 text-xl",
+        outst: "opacity-0",
+        outen: "opacity-50",
+      });
+      await sleep(0);
+      setClassName({
+        ul: "transition-all duration-500",
+        main: "flex justify-center items-center w-24 transition-all duration-500",
+        mid: "text-xl opacity-100",
+        subst: "opacity-50 text-base",
+        suben: "opacity-50 text-base",
+        outst: "opacity-0",
+        outen: "opacity-0",
+      });
+    }
   }
 
   return (
-    <nav className="flex">
+    <nav className={`flex w-full justify-center ${className.ul}`}>
       <LocationsPath
         handleClick={handleClick}
         className={className}
-        setClassName={setClassName}
+        direction={direction}
       />
       <ForecastsPath
         handleClick={handleClick}
         className={className}
-        setClassName={setClassName}
+        direction={direction}
       />
     </nav>
   );
 }
 
-function LocationsPath({
-  handleClick,
-  className,
-  setClassName,
-  direction,
-}: any) {
-  async function handleClickLocal(
-    e: React.MouseEvent<HTMLAnchorElement>,
-    direction?: "left" | "right",
-  ) {
-    handleClick(e, direction);
-    if (direction) {
-      setClassName({
-        main:
-          (direction === "left" ? "translate-x-full" : "-translate-x-full") +
-          " text-base",
-        sub: direction === "left" ? "translate-x-full" : "-translate-x-full",
-      });
-      await sleep(1000);
-      setClassName({ main: "transition-all duration-500", sub: "" });
-      await sleep(1000);
-      setClassName({ main: "", sub: "" });
-    }
-  }
-
+function LocationsPath({ handleClick, className, direction }: any) {
   if (location.pathname.startsWith("/locations")) {
     return (
       <>
         <Link
           className={`${className.main} ${
-            direction === "left" ? className.sub : ""
+            direction === "right" ? className.outst : className.outen
           }`}
-          to="/forecasts"
-          onClick={(e) => handleClickLocal(e, "right")}
-        >
-          Forecasts
-        </Link>
-        <Link
-          className={`${className.main} text-xl`}
           to="/locations"
-          onClick={(e) => handleClickLocal(e)}
+          onClick={(e) => handleClick(e)}
         >
-          Locations
+          locations
         </Link>
         <Link
           className={`${className.main} ${
-            direction === "right" ? className.sub : ""
+            direction === "right" ? className.subst : className.suben
           }`}
           to="/forecasts"
-          onClick={(e) => handleClickLocal(e, "left")}
+          onClick={(e) => handleClick(e, "right")}
         >
-          Forecasts
+          forecasts
+        </Link>
+        <Link
+          className={`${className.main} ${className.mid}`}
+          to="/locations"
+          onClick={(e) => handleClick(e)}
+        >
+          locations
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.suben : className.subst
+          }`}
+          to="/forecasts"
+          onClick={(e) => handleClick(e, "left")}
+        >
+          forecasts
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.outen : className.outst
+          }`}
+          to="/locations"
+          onClick={(e) => handleClick(e)}
+        >
+          locations
         </Link>
       </>
     );
@@ -97,58 +120,52 @@ function LocationsPath({
   return null;
 }
 
-function ForecastsPath({
-  handleClick,
-  className,
-  setClassName,
-  direction,
-}: any) {
-  async function handleClickLocal(
-    e: React.MouseEvent<HTMLAnchorElement>,
-    direction?: "left" | "right",
-  ) {
-    handleClick(e, direction);
-    if (direction) {
-      setClassName({
-        main:
-          (direction === "left" ? "translate-x-full" : "-translate-x-full") +
-          " text-base",
-        sub: direction === "left" ? "translate-x-full" : "-translate-x-full",
-      });
-      await sleep(1000);
-      setClassName({ main: "transition-all duration-500", sub: "" });
-      await sleep(1000);
-      setClassName({ main: "", sub: "" });
-    }
-  }
-
+function ForecastsPath({ handleClick, className, direction }: any) {
   if (location.pathname.startsWith("/forecasts")) {
     return (
       <>
         <Link
           className={`${className.main} ${
-            direction === "left" ? className.sub : ""
+            direction === "right" ? className.outst : className.outen
           }`}
-          to="/locations"
-          onClick={(e) => handleClickLocal(e, "right")}
-        >
-          Locations
-        </Link>
-        <Link
-          className={`${className.main} text-xl`}
           to="/forecasts"
-          onClick={(e) => handleClickLocal(e)}
+          onClick={(e) => handleClick(e)}
         >
-          Forecasts
+          forecasts
         </Link>
         <Link
           className={`${className.main} ${
-            direction === "right" ? className.sub : ""
+            direction === "right" ? className.subst : className.suben
           }`}
           to="/locations"
-          onClick={(e) => handleClickLocal(e, "left")}
+          onClick={(e) => handleClick(e, "right")}
         >
-          Locations
+          locations
+        </Link>
+        <Link
+          className={`${className.main} ${className.mid}`}
+          to="/forecasts"
+          onClick={(e) => handleClick(e)}
+        >
+          forecasts
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.subend : className.subst
+          }`}
+          to="/locations"
+          onClick={(e) => handleClick(e, "left")}
+        >
+          locations
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.outen : className.outst
+          }`}
+          to="/forecasts"
+          onClick={(e) => handleClick(e)}
+        >
+          forecasts
         </Link>
       </>
     );
