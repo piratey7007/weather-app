@@ -151,7 +151,7 @@ function ForecastsPath({ handleClick, className, direction }: any) {
         </Link>
         <Link
           className={`${className.main} ${
-            direction === "right" ? className.subend : className.subst
+            direction === "right" ? className.suben : className.subst
           }`}
           to="/locations"
           onClick={(e) => handleClick(e, "left")}
