@@ -1,58 +1,157 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export default function Nav() {
   const location = useLocation();
-  const ref = useRef<HTMLUListElement>(null);
-  const [links, setLinks] = useState([
-    { name: "Locations", path: "/locations" },
-    { name: "Forecasts", path: "/forecasts" },
-  ]);
-  function handleClick() {
-    console.log("clicked");
+  const navigate = useNavigate();
+  const [className, setClassName] = useState("");
+  const [direction, setDirection] = useState<"left" | "right">();
+
+  function handleClick(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    direction?: "left" | "right",
+  ) {
+    e.preventDefault();
+    setDirection(direction);
+    if (!direction) return;
+    const path = e.currentTarget.getAttribute("href")!;
+    navigate(path);
   }
-
-  function transitionLinks() {
-    for (const li of ref.current?.children as HTMLCollectionOf<HTMLElement>) {
-      li.classList.add("translate-");
-    }
-  }
-
-  function rotateLinks(dir: "left" | "right") {
-    const [first, ...rest] = links;
-    setLinks([...rest, first]);
-    transitionLinks();
-  }
-
-  function check() {
-    console.log("Checked");
-    if (links.length < 3) setLinks([...links, ...links]);
-  }
-
-  useEffect(() => {
-    check();
-    if (location.pathname !== links[0].path) rotateLinks("left");
-    console.log("location changed");
-  }, [location]);
-
-  useEffect(() => {
-    check();
-    console.log("links changed");
-  }, [links]);
 
   return (
-    <nav>
-      <ul ref={ref} className="flex gap-4">
-        {links.map(({ name, path }, i) => (
-          <li key={path + i}>
-            <Link to={path} onClick={handleClick}>
-              {name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <nav className="flex">
+      <LocationsPath
+        handleClick={handleClick}
+        className={className}
+        setClassName={setClassName}
+      />
+      <ForecastsPath
+        handleClick={handleClick}
+        className={className}
+        setClassName={setClassName}
+      />
     </nav>
   );
 }
 
-export default Navbar;
+function LocationsPath({
+  handleClick,
+  className,
+  setClassName,
+  direction,
+}: any) {
+  async function handleClickLocal(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    direction?: "left" | "right",
+  ) {
+    handleClick(e, direction);
+    if (direction) {
+      setClassName({
+        main:
+          (direction === "left" ? "translate-x-full" : "-translate-x-full") +
+          " text-base",
+        sub: direction === "left" ? "translate-x-full" : "-translate-x-full",
+      });
+      await sleep(1000);
+      setClassName({ main: "transition-all duration-500", sub: "" });
+      await sleep(1000);
+      setClassName({ main: "", sub: "" });
+    }
+  }
+
+  if (location.pathname.startsWith("/locations")) {
+    return (
+      <>
+        <Link
+          className={`${className.main} ${
+            direction === "left" ? className.sub : ""
+          }`}
+          to="/forecasts"
+          onClick={(e) => handleClickLocal(e, "right")}
+        >
+          Forecasts
+        </Link>
+        <Link
+          className={`${className.main} text-xl`}
+          to="/locations"
+          onClick={(e) => handleClickLocal(e)}
+        >
+          Locations
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.sub : ""
+          }`}
+          to="/forecasts"
+          onClick={(e) => handleClickLocal(e, "left")}
+        >
+          Forecasts
+        </Link>
+      </>
+    );
+  }
+  return null;
+}
+
+function ForecastsPath({
+  handleClick,
+  className,
+  setClassName,
+  direction,
+}: any) {
+  async function handleClickLocal(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    direction?: "left" | "right",
+  ) {
+    handleClick(e, direction);
+    if (direction) {
+      setClassName({
+        main:
+          (direction === "left" ? "translate-x-full" : "-translate-x-full") +
+          " text-base",
+        sub: direction === "left" ? "translate-x-full" : "-translate-x-full",
+      });
+      await sleep(1000);
+      setClassName({ main: "transition-all duration-500", sub: "" });
+      await sleep(1000);
+      setClassName({ main: "", sub: "" });
+    }
+  }
+
+  if (location.pathname.startsWith("/forecasts")) {
+    return (
+      <>
+        <Link
+          className={`${className.main} ${
+            direction === "left" ? className.sub : ""
+          }`}
+          to="/locations"
+          onClick={(e) => handleClickLocal(e, "right")}
+        >
+          Locations
+        </Link>
+        <Link
+          className={`${className.main} text-xl`}
+          to="/forecasts"
+          onClick={(e) => handleClickLocal(e)}
+        >
+          Forecasts
+        </Link>
+        <Link
+          className={`${className.main} ${
+            direction === "right" ? className.sub : ""
+          }`}
+          to="/locations"
+          onClick={(e) => handleClickLocal(e, "left")}
+        >
+          Locations
+        </Link>
+      </>
+    );
+  }
+  return null;
+}
