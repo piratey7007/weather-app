@@ -1,11 +1,10 @@
 export default function Moon({ className = "" }) {
   return (
     <svg
-      width="500"
-      height="500"
       viewBox="0 0 500 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className ?? ""}
     >
       <mask
         id="mask0_2_1522"

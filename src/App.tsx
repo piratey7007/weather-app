@@ -9,7 +9,6 @@ import Nav from "./components/Nav";
 
 const Layout = () => (
   <>
-    <Nav />
     <Outlet />
   </>
 );

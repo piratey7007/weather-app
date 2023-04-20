@@ -15,7 +15,8 @@ function check(description: string) {
 }
 
 export default function useIcon(description: string) {
-  if (!check(description)) return () => null;
+  if (!check(description))
+    return ({ className }: { className?: string }) => null;
   const props = {} as any;
   if (
     description.includes("few clouds") ||
@@ -32,5 +33,7 @@ export default function useIcon(description: string) {
   if (description.includes("thunderstorm")) props.lightning = true;
   if (description.includes("snow")) props.snow = true;
   if (description.includes("mist")) props.mist = true;
-  return (): JSX.Element => <Icon {...props} />;
+  return ({ className }: { className?: string }): JSX.Element => (
+    <Icon {...props} className={className ?? ""} />
+  );
 }

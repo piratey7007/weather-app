@@ -1,6 +1,6 @@
 import { useSettings } from "../contexts/SettingsContext";
 import useIcon from "../hooks/useIcon";
-import useTemp from "../hooks/useTemp";
+import useTemps from "../hooks/useTemps";
 
 export default function ListItem({
   item: { title, high, low, description, temperature },
@@ -14,27 +14,27 @@ export default function ListItem({
   };
 }) {
   const Icon = useIcon(description);
-  const { number } = useTemp(temperature);
-  const { number: highNumber } = useTemp(temperature);
-  const { number: lowNumber } = useTemp(temperature);
+  const {
+    numbers: [t, h, l],
+  } = useTemps([temperature, high, low]);
   const { toggleSign, sign } = useSettings();
   return (
-    <li className="flex justify-between">
+    <li className="flex w-[24rem] max-w-[95%] cursor-pointer justify-between rounded-xl bg-white bg-opacity-[17%] p-4 transition-all duration-200 hover:bg-opacity-25">
       <div className="flex flex-col justify-between">
         <h3>{title}</h3>
         <div className="flex">
-          <h3>H {highNumber}°</h3>
-          <h3>L {lowNumber}°</h3>
+          <h4>H {h}°</h4>
+          <h4>L {l}°</h4>
         </div>
       </div>
-      <div className="flex justify-end">
-        <Icon />
+      <div className="flex items-center justify-end">
+        <Icon className="w-16" />
         <div className="flex">
-          <h1>{number}°</h1>
-          <div onClick={toggleSign} className="flex flex-col">
-            <h1>{sign}</h1>
+          <h2>{t}°</h2>
+          <div onClick={toggleSign} className="flex flex-col items-center">
+            <h2>{sign}</h2>
             <hr />
-            <h3>{sign === "C" ? "F" : "C"}</h3>
+            <h4>{sign === "C" ? "F" : "C"}</h4>
           </div>
         </div>
       </div>

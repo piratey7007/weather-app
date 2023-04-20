@@ -63,7 +63,7 @@ export default function Icon({
             <Cloud className="absolute left-0 right-0 top-[1/5] mx-auto w-2/3" />
           </>
         ) : (
-          <Orb className="absolute left-0 right-0 top-[10%] mx-auto w-1/2" />
+          <Orb className="absolute bottom-0 left-0 right-0 top-0 m-auto w-2/3" />
         )
       ) : (
         <>
