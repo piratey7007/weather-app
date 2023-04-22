@@ -1,0 +1,15 @@
+@model WeatherApp.Models.Weather
+
+@if (Model != null)
+{
+    if (Model.City != null && Model.Region != null && Model.Country != null)
+    {
+        <h2>@Model.City, @Model.Region, @Model.Country</h2>
+    }
+    <p>Temperature: @Model.Temperature °C</p>
+    <p>Description: @Model.Description</p>
+}
+else
+{
+    <p>Weather data not available for the specified city.</p>
+}

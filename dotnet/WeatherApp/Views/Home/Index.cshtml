@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form asp-controller="Home" asp-action="GetWeather" method="post">
+        <label for="city">Enter city name:</label>
+        <input type="text" id="city" name="city" required />
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="weatherResult"></div>
+</div>
+
+@section Scripts{
+    <script>
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                method: form.attr("method"),
+                data: form.serialize(),
+                success: function (partialView) {
+                $("#weatherResult").html(partialView);
+            }})});
+    </script>
+}
