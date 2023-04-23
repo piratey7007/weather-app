@@ -14,7 +14,33 @@ public class Forecast
         public string? Date { get; set; }
         public string? Description { get; set; }
         public int? Temperature { get; set; }
+        public int Low { get; set; }
+        public int High { get; set; }
     }
+    public int GetLow(List<ForecastChunk> forecastChunks, string day)
+    {
+        int lowest = 100000000;
+        for (int i = 0; i < forecastChunks.Count; i++)
+        {
+            ForecastChunk forecastChunk = forecastChunks[i];
+            if (i == 0) lowest = forecastChunk.Low;
+            else if ((forecastChunk.Day == day && forecastChunk.Low < lowest)) lowest = forecastChunk.Low;
+        }
+        return lowest;
+    }
+
+    public int GetHigh(List<ForecastChunk> forecastChunks, string day)
+    {
+        int highest = 0;
+        for (int i = 0; i < forecastChunks.Count; i++)
+        {
+            ForecastChunk forecastChunk = forecastChunks[i];
+            if (i == 0) highest = forecastChunk.High;
+            else if ((forecastChunk.Day == day && forecastChunk.High > highest)) highest = forecastChunk.High;
+        }
+        return highest;
+    }
+
 }
 
 public class ForecastResponse

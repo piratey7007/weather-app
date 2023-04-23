@@ -66,13 +66,16 @@ public class WeatherService
                 City = location?.City,
                 Region = location?.Region,
                 Country = location?.Country,
-                ForecastChunks = data.list.Select(day => new Forecast.ForecastChunk
+                ForecastChunks = data.list.Select(chunk => new Forecast.ForecastChunk
                 {
-                    Day = DateTime.Parse(day.dt_txt).DayOfWeek.ToString(),
-                    Date = day.dt_txt,
-                    Temperature = (int)day.main.temp,
-                    Description = day.weather[0].description.ToString(),
+                    Day = DateTime.Parse(chunk.dt_txt).DayOfWeek.ToString(),
+                    Date = chunk.dt_txt,
+                    Temperature = (int)chunk.main.temp,
+                    High = (int)chunk.main.temp_max,
+                    Low = (int)chunk.main.temp_min,
+                    Description = chunk.weather[0].description.ToString(),
                 }).ToList(),
+
             };
         }
     }

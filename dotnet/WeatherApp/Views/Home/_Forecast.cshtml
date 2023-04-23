@@ -22,7 +22,7 @@
             <h3>
                 @chunk.Day
             </h3>
-            <p>@chunk.Date, @chunk.Description</p>
+            <p>@chunk.Date, @chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks, chunk.Day)</p>
             j = chunk.Day;
         }
     }
