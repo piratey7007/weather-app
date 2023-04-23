@@ -3,17 +3,23 @@
 }
 
 <div class="text-center">
-    <form asp-controller="Home" asp-action="GetWeather" method="post">
+    <form id="weather" asp-controller="Home" asp-action="GetWeather" method="post">
         <label for="city">Enter city name:</label>
         <input type="text" id="city" name="city" required />
         <button type="submit">Get Weather</button>
     </form>
     <div id="weatherResult"></div>
+    <form id="forecast" asp-controller="Home" asp-action="GetForecast" method="post">
+        <label for="city">Enter city name:</label>
+        <input type="text" id="city" name="city" required />
+        <button type="submit">Get Forecast</button>
+    </form>
+    <div id="forecastResult"></div>
 </div>
 
 @section Scripts{
     <script>
-        $("form").on("submit", function (e) {
+        $("form#weather").on("submit", function (e) {
             e.preventDefault();
             var form = $(this);
             $.ajax({
@@ -22,6 +28,17 @@
                 data: form.serialize(),
                 success: function (partialView) {
                 $("#weatherResult").html(partialView);
+            }})});
+        
+        $("form#forecast").on("submit", function (e) {
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                method: form.attr("method"),
+                data: form.serialize(),
+                success: function (partialView) {
+                $("#forecastResult").html(partialView);
             }})});
     </script>
 }

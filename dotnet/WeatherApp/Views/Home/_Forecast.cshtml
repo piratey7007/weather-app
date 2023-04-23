@@ -1,0 +1,33 @@
+@model WeatherApp.Models.Forecast
+
+@if (Model != null)
+{
+    if (Model.City != null && Model.Region != null && Model.Country != null)
+    {
+        <h2>@Model.City, @Model.Region, @Model.Country</h2>
+    }
+    string j = "";
+    for (int i = 0; i < Model.ForecastChunks.Count; i++)
+    {
+        var chunk = Model.ForecastChunks[i];
+        string today = DateTime.Now.DayOfWeek.ToString();
+        if (chunk.Day == today)
+        {
+            <h3></h3>
+            <p>@chunk.Date, @chunk.Description, @chunk.Temperature</p>
+            j = today;
+        }
+        else if (j != chunk.Day)
+        {
+            <h3>
+                @chunk.Day
+            </h3>
+            <p>@chunk.Date, @chunk.Description</p>
+            j = chunk.Day;
+        }
+    }
+}
+else
+{
+    <p>Forecast data not available for the specified city.</p>
+}

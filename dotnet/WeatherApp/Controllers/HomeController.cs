@@ -24,4 +24,11 @@ public class HomeController : Controller
         var weather = await _weatherService.GetWeatherAsync(city);
         return PartialView("_Weather", weather);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> GetForecast(string city)
+    {
+        var forecast = await _weatherService.GetForecastAsync(city);
+        return PartialView("_Forecast", forecast);
+    }
 }

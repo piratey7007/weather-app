@@ -6,24 +6,24 @@ using Newtonsoft.Json.Linq;
 public class WeatherService
 {
     private const string API_KEY = "918ff66eee27dedd2a466752c8ac53eb";
-    private const string API_URL = "http://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}&units=metric";
+    private const string API_URL_WEATHER = "http://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}&units=metric";
 
     public async Task<Location?> GetLocationAsync(string lat, string lon)
     {
         using (var client = new HttpClient())
         {
-            Console.WriteLine(string.Format("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={0}&lon={1}&addressdetails=1", lat, lon));
             client.DefaultRequestHeaders.Add("User-Agent", "WeatherApp");
             var response = await client.GetAsync(string.Format("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={0}&lon={1}&addressdetails=1", lat, lon));
             if (!response.IsSuccessStatusCode) return null;
 
             var json = await response.Content.ReadAsStringAsync();
-            var data = JObject.Parse(json);
+            JObject jObject = JObject.Parse(json);
+            LocationResponse data = jObject.ToObject<LocationResponse>();
             return new Location
             {
-                City = data["address"]["city"].ToString(),
-                Region = data["address"]["state"].ToString(),
-                Country = data["address"]["country"].ToString(),
+                City = data.address.city,
+                Region = data.address.state,
+                Country = data.address.country,
             };
         }
     }
@@ -32,23 +32,48 @@ public class WeatherService
     {
         using (var client = new HttpClient())
         {
-            var response = await client.GetAsync(string.Format(API_URL, city, API_KEY));
+            var response = await client.GetAsync(string.Format(API_URL_WEATHER, city, API_KEY));
             if (!response.IsSuccessStatusCode) return null;
 
             var json = await response.Content.ReadAsStringAsync();
-            var data = JObject.Parse(json);
-            var coord = data["coord"];
-            var location = await GetLocationAsync(coord["lat"].ToString(), coord["lon"].ToString());
-            Console.WriteLine(location);
+            JObject jObject = JObject.Parse(json);
+            WeatherResponse data = jObject.ToObject<WeatherResponse>()!;
+            Location location = await GetLocationAsync(data.coord.lat.ToString(), data.coord.lon.ToString());
             return new Weather
             {
                 City = location?.City,
                 Region = location?.Region,
                 Country = location?.Country,
-                Temperature = data["main"]["temp"].ToString(),
-                Description = data["weather"][0]["description"].ToString(),
+                Temperature = data.main.temp.ToString(),
+                Description = data.weather[0].description.ToString(),
             };
         }
     }
 
+    public async Task<Forecast?> GetForecastAsync(string city)
+    {
+        using (var client = new HttpClient())
+        {
+            var response = await client.GetAsync(string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&appid={1}&units=metric", city, API_KEY));
+            if (!response.IsSuccessStatusCode) return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            JObject jObject = JObject.Parse(json);
+            ForecastResponse data = jObject.ToObject<ForecastResponse>()!;
+            Location location = await GetLocationAsync(data.city.coord.lat.ToString(), data.city.coord.lon.ToString());
+            return new Forecast
+            {
+                City = location?.City,
+                Region = location?.Region,
+                Country = location?.Country,
+                ForecastChunks = data.list.Select(day => new Forecast.ForecastChunk
+                {
+                    Day = DateTime.Parse(day.dt_txt).DayOfWeek.ToString(),
+                    Date = day.dt_txt,
+                    Temperature = (int)day.main.temp,
+                    Description = day.weather[0].description.ToString(),
+                }).ToList(),
+            };
+        }
+    }
 }
