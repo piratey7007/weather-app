@@ -9,14 +9,19 @@ public class Location
 
 public class LocationResponse
 {
-    public string place_id { get; set; }
+    [JsonProperty("place_id")]
+    public string placeId { get; set; }
     public string licence { get; set; }
-    public string osm_type { get; set; }
-    public string osm_id { get; set; }
-    public List<string> boundingbox { get; set; }
+    [JsonProperty("osm_type")]
+    public string osmType { get; set; }
+    [JsonProperty("osm_id")]
+    public string osmId { get; set; }
+    [JsonProperty("boundingbox")]
+    public List<string> boundingBox { get; set; }
     public string lat { get; set; }
     public string lon { get; set; }
-    public string display_name { get; set; }
+    [JsonProperty("display_name")]
+    public string displayName { get; set; }
     [JsonProperty("class")]
     public string className { get; set; }
     public string type { get; set; }
@@ -25,12 +30,14 @@ public class LocationResponse
     public record Address
     {
         public string city { get; set; }
-        public string state_district { get; set; }
+        [JsonProperty("state_district")]
+        public string stateDistrict { get; set; }
         public string state { get; set; }
         public string ISO3166_2_lvl4 { get; set; }
         public string postcode { get; set; }
         public string country { get; set; }
-        public string country_code { get; set; }
+        [JsonProperty("country_code")]
+        public string countryCode { get; set; }
     }
     public Address address { get; set; }
     public record ExtraTags
@@ -41,5 +48,6 @@ public class LocationResponse
         public string wikipedia { get; set; }
         public string population { get; set; }
     }
-    public ExtraTags extratags { get; set; }
+    [JsonProperty("extratags")]
+    public ExtraTags extraTags { get; set; }
 }
