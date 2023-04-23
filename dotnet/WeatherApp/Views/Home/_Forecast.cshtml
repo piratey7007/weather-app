@@ -23,6 +23,7 @@
                 @chunk.Day
             </h3>
             <p>@chunk.Date, @chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks, chunk.Day)</p>
+            <img src="/Images/@Model.GetIconUrl(Model.ForecastChunks, chunk.Day)" />
             j = chunk.Day;
         }
     }

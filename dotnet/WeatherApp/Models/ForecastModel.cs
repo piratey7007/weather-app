@@ -41,6 +41,43 @@ public class Forecast
         return highest;
     }
 
+    public string GetIconUrl(List<ForecastChunk> forecastChunks, string day)
+    {
+        bool overcast = false;
+        bool few = false;
+        bool scattered = false;
+        bool rain = false;
+        bool snow = false;
+        bool thunderstorm = false;
+        for (int i = 0; i < forecastChunks.Count; i++)
+        {
+            ForecastChunk forecastChunk = forecastChunks[i];
+            if (forecastChunk.Day == day)
+            {
+                string description = forecastChunk.Description;
+                if (description.Contains("overcast")) overcast = true;
+                if (description.Contains("few clouds")) few = true;
+                if (description.Contains("scattered clouds")) scattered = true;
+                if (description.Contains("rain") || description.Contains("drizzle")) rain = true;
+                if (description.Contains("snow")) snow = true;
+                if (description.Contains("thunderstorm")) thunderstorm = true;
+            }
+        }
+        string icon = "";
+        if (overcast) icon = "overcast";
+        else if (few) icon = "few";
+        else if (scattered) icon = "scattered";
+        var chunkTime = DateTime.Parse(forecastChunks[0].Date).TimeOfDay;
+        if (!overcast)
+        {
+            if (chunkTime.Hours >= 18 || chunkTime.Hours <= 6) icon += "_night";
+            else icon += "_day";
+        }
+        if (thunderstorm) icon += "_thunderstorm";
+        else if (snow) icon += "_snow";
+        else if (rain) icon += "_rain";
+        return icon + ".png";
+    }
 }
 
 public class ForecastResponse

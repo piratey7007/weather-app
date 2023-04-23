@@ -5,6 +5,62 @@
       "PackagePath": "staticwebassets/WeatherApp.bundle.scp.css"
     },
     {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/clear_day.png",
+      "PackagePath": "staticwebassets/Images/clear_day.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/clear_night.png",
+      "PackagePath": "staticwebassets/Images/clear_night.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day.png",
+      "PackagePath": "staticwebassets/Images/few_day.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day_rain.png",
+      "PackagePath": "staticwebassets/Images/few_day_rain.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day_thunder.png",
+      "PackagePath": "staticwebassets/Images/few_day_thunder.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night.png",
+      "PackagePath": "staticwebassets/Images/few_night.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night_rain.png",
+      "PackagePath": "staticwebassets/Images/few_night_rain.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night_thunder.png",
+      "PackagePath": "staticwebassets/Images/few_night_thunder.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast.png",
+      "PackagePath": "staticwebassets/Images/overcast.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast_rain.png",
+      "PackagePath": "staticwebassets/Images/overcast_rain.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast_thunder.png",
+      "PackagePath": "staticwebassets/Images/overcast_thunder.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered.png",
+      "PackagePath": "staticwebassets/Images/scattered.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered_rain.png",
+      "PackagePath": "staticwebassets/Images/scattered_rain.png"
+    },
+    {
+      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered_thunder.png",
+      "PackagePath": "staticwebassets/Images/scattered_thunder.png"
+    },
+    {
       "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

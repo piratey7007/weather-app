@@ -33,3 +33,10 @@
 /Users/mx/dev/weather-app/dotnet/WeatherApp/obj/Debug/net7.0/WeatherApp.pdb
 /Users/mx/dev/weather-app/dotnet/WeatherApp/obj/Debug/net7.0/WeatherApp.genruntimeconfig.cache
 /Users/mx/dev/weather-app/dotnet/WeatherApp/obj/Debug/net7.0/ref/WeatherApp.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.Mvc.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.Razor.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.Helpers.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.WebPages.Deployment.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.WebPages.Razor.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/System.Web.WebPages.dll
+/Users/mx/dev/weather-app/dotnet/WeatherApp/bin/Debug/net7.0/Microsoft.Web.Infrastructure.dll
