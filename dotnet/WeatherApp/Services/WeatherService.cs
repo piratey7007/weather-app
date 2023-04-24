@@ -16,10 +16,10 @@ public class WeatherService
 
             var json = await response.Content.ReadAsStringAsync();
             JObject jObject = JObject.Parse(json);
-            LocationResponse data = jObject.ToObject<LocationResponse>();
+            LocationResponse data = jObject.ToObject<LocationResponse>()!;
             return new Location
             {
-                City = data.address.city,
+                City = data!.address!.city,
                 Region = data.address.state,
                 Country = data.address.country,
             };
@@ -36,14 +36,14 @@ public class WeatherService
             var json = await response.Content.ReadAsStringAsync();
             JObject jObject = JObject.Parse(json);
             WeatherResponse data = jObject.ToObject<WeatherResponse>()!;
-            Location location = await GetLocationAsync(data.coord.lat.ToString(), data.coord.lon.ToString());
+            Location? location = await GetLocationAsync(data.coord!.lat.ToString(), data.coord.lon.ToString());
             return new Weather
             {
                 City = location?.City,
                 Region = location?.Region,
                 Country = location?.Country,
-                Temperature = data.main.temp.ToString(),
-                Description = data.weather[0].description.ToString(),
+                Temperature = data.main!.temp.ToString(),
+                Description = data.weather![0].description!.ToString(),
             };
         }
     }
@@ -58,20 +58,20 @@ public class WeatherService
             var json = await response.Content.ReadAsStringAsync();
             JObject jObject = JObject.Parse(json);
             ForecastResponse data = jObject.ToObject<ForecastResponse>()!;
-            Location location = await GetLocationAsync(data.city.coord.lat.ToString(), data.city.coord.lon.ToString());
+            Location? location = await GetLocationAsync(data.city!.coord!.lat.ToString(), data.city.coord.lon.ToString());
             return new Forecast
             {
                 City = location?.City,
                 Region = location?.Region,
                 Country = location?.Country,
-                ForecastChunks = data.list.Select(chunk => new Forecast.ForecastChunk
+                ForecastChunks = data.list!.Select(chunk => new Forecast.ForecastChunk
                 {
-                    Day = DateTime.Parse(chunk.dt_txt).DayOfWeek.ToString(),
+                    Day = DateTime.Parse(chunk.dt_txt!).DayOfWeek.ToString(),
                     Date = chunk.dt_txt,
-                    Temperature = (int)chunk.main.temp,
+                    Temperature = (int)chunk.main!.temp,
                     High = (int)chunk.main.temp_max,
                     Low = (int)chunk.main.temp_min,
-                    Description = chunk.weather[0].description.ToString(),
+                    Description = chunk.weather![0].description!.ToString(),
                 }).ToList(),
 
             };

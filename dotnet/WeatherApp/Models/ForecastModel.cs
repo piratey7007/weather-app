@@ -7,7 +7,7 @@ public class Forecast
     public string? City { get; set; }
     public string? Region { get; set; }
     public string? Country { get; set; }
-    public List<ForecastChunk> ForecastChunks { get; set; }
+    public List<ForecastChunk>? ForecastChunks { get; set; }
     public record ForecastChunk
     {
         public string? Day { get; set; }
@@ -54,7 +54,7 @@ public class Forecast
             ForecastChunk forecastChunk = forecastChunks[i];
             if (forecastChunk.Day == day)
             {
-                string description = forecastChunk.Description;
+                string description = forecastChunk.Description!;
                 if (description.Contains("overcast")) overcast = true;
                 if (description.Contains("few clouds")) few = true;
                 if (description.Contains("scattered clouds")) scattered = true;
@@ -67,7 +67,7 @@ public class Forecast
         if (overcast) icon = "overcast";
         else if (few) icon = "few";
         else if (scattered) icon = "scattered";
-        var chunkTime = DateTime.Parse(forecastChunks[0].Date).TimeOfDay;
+        var chunkTime = DateTime.Parse(forecastChunks[0].Date!).TimeOfDay;
         if (!overcast && !scattered)
         {
             if (chunkTime.Hours >= 18 || chunkTime.Hours <= 6) icon += "_night";
@@ -83,18 +83,18 @@ public class Forecast
 
 public class ForecastResponse
 {
-    public string cod { get; set; }
+    public string? cod { get; set; }
     public int message { get; set; }
     public int cnt { get; set; }
     public record List
     {
         public int dt { get; set; }
-        public Main main { get; set; }
-        public List<Weather> weather { get; set; }
-        public Clouds clouds { get; set; }
-        public Wind wind { get; set; }
-        public Rain rain { get; set; }
-        public Sys sys { get; set; }
+        public Main? main { get; set; }
+        public List<Weather>? weather { get; set; }
+        public Clouds? clouds { get; set; }
+        public Wind? wind { get; set; }
+        public Rain? rain { get; set; }
+        public Sys? sys { get; set; }
         public record Main
         {
             public double temp { get; set; }
@@ -110,9 +110,9 @@ public class ForecastResponse
         public record Weather
         {
             public int id { get; set; }
-            public string main { get; set; }
-            public string description { get; set; }
-            public string icon { get; set; }
+            public string? main { get; set; }
+            public string? description { get; set; }
+            public string? icon { get; set; }
         }
         public record Clouds
         {
@@ -132,26 +132,26 @@ public class ForecastResponse
         }
         public record Sys
         {
-            public string pod { get; set; }
+            public string? pod { get; set; }
         }
-        public string dt_txt { get; set; }
+        public string? dt_txt { get; set; }
     }
     public record City
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public Coord coord { get; set; }
+        public string? name { get; set; }
+        public Coord? coord { get; set; }
         public record Coord
         {
             public double lat { get; set; }
             public double lon { get; set; }
         }
-        public string country { get; set; }
+        public string? country { get; set; }
         public int population { get; set; }
         public int timezone { get; set; }
         public int sunrise { get; set; }
         public int sunset { get; set; }
     }
-    public List[] list { get; set; }
-    public City city { get; set; }
+    public List[]? list { get; set; }
+    public City? city { get; set; }
 }
