@@ -29,4 +29,5 @@ public class HomeController : Controller
         var forecast = await _weatherService.GetForecastAsync(city);
         return PartialView("_Forecast", forecast);
     }
+
 }
