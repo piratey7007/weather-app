@@ -18,27 +18,31 @@
 </div>
 
 @section Scripts{
-    <script>
-        $("form#weather").on("submit", function (e) {
-            e.preventDefault();
-            var form = $(this);
-            $.ajax({
-                url: form.attr("action"),
-                method: form.attr("method"),
-                data: form.serialize(),
-                success: function (partialView) {
+<script>
+    $("form#weather").on("submit", function (e) {
+        e.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize(),
+            success: function (partialView) {
                 $("#weatherResult").html(partialView);
-            }})});
-        
-        $("form#forecast").on("submit", function (e) {
-            e.preventDefault();
-            var form = $(this);
-            $.ajax({
-                url: form.attr("action"),
-                method: form.attr("method"),
-                data: form.serialize(),
-                success: function (partialView) {
+            }
+        })
+    });
+
+    $("form#forecast").on("submit", function (e) {
+        e.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize(),
+            success: function (partialView) {
                 $("#forecastResult").html(partialView);
-            }})});
-    </script>
+            }
+        })
+    });
+</script>
 }

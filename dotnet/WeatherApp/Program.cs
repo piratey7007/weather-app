@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<WeatherService>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
