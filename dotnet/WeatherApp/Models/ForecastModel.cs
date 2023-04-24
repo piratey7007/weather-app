@@ -68,7 +68,7 @@ public class Forecast
         else if (few) icon = "few";
         else if (scattered) icon = "scattered";
         var chunkTime = DateTime.Parse(forecastChunks[0].Date).TimeOfDay;
-        if (!overcast)
+        if (!overcast && !scattered)
         {
             if (chunkTime.Hours >= 18 || chunkTime.Hours <= 6) icon += "_night";
             else icon += "_day";
@@ -76,6 +76,7 @@ public class Forecast
         if (thunderstorm) icon += "_thunderstorm";
         else if (snow) icon += "_snow";
         else if (rain) icon += "_rain";
+        if (icon.StartsWith("_")) icon = icon.Substring(1);
         return icon + ".png";
     }
 }
