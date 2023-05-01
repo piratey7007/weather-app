@@ -3,9 +3,16 @@ using Newtonsoft.Json.Linq;
 
 public class WeatherService
 {
+    private static WeatherLocations _locations = new WeatherLocations(new Dictionary<LocationBasic, Weather>());
+    public record WeatherOptions
+    {
+        public bool force { get; set; }
+    }
+    public record ForecastOptions
+    {
+        public bool force { get; set; }
+    }
     private const string API_KEY = "918ff66eee27dedd2a466752c8ac53eb";
-    private const string API_URL_WEATHER = "http://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}&units=metric";
-
     public async Task<Location?> GetLocationAsync(string lat, string lon)
     {
         using (var client = new HttpClient())
@@ -19,62 +26,117 @@ public class WeatherService
             LocationResponse data = jObject.ToObject<LocationResponse>()!;
             return new Location
             {
-                City = data!.address!.city,
+                City = data.address!.city,
                 Region = data.address.state,
                 Country = data.address.country,
+                Latitude = double.Parse(data.lat!),
+                Longitude = double.Parse(data.lon!)
             };
         }
     }
 
-    public async Task<Weather?> GetWeatherAsync(string city)
+    public async Task<Weather?> GetLocationWeatherAsync(Location input, WeatherOptions? options = null)
     {
         using (var client = new HttpClient())
         {
-            var response = await client.GetAsync(string.Format(API_URL_WEATHER, city, API_KEY));
-            if (!response.IsSuccessStatusCode) return null;
-
-            var json = await response.Content.ReadAsStringAsync();
-            JObject jObject = JObject.Parse(json);
-            WeatherResponse data = jObject.ToObject<WeatherResponse>()!;
-            Location? location = await GetLocationAsync(data.coord!.lat.ToString(), data.coord.lon.ToString());
-            return new Weather
+            LocationBasic key = new LocationBasic
             {
-                City = location?.City,
-                Region = location?.Region,
-                Country = location?.Country,
-                Temperature = data.main!.temp.ToString(),
-                Description = data.weather![0].description!.ToString(),
+                City = input.City,
+                Region = input.Region,
+                Country = input.Country
             };
-        }
-    }
+            if (options?.force == true) _locations.Locations.Remove(key);
+            if (_locations.Locations.ContainsKey(key)) return _locations.Locations[key];
 
-    public async Task<Forecast?> GetForecastAsync(string city)
-    {
-        using (var client = new HttpClient())
-        {
-            var response = await client.GetAsync(string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&appid={1}&units=metric", city, API_KEY));
-            if (!response.IsSuccessStatusCode) return null;
+            (string City, string Region, string Country) = (input.City!, input.Region!, input.Country!);
+            Location location;
 
-            var json = await response.Content.ReadAsStringAsync();
-            JObject jObject = JObject.Parse(json);
-            ForecastResponse data = jObject.ToObject<ForecastResponse>()!;
-            Location? location = await GetLocationAsync(data.city!.coord!.lat.ToString(), data.city.coord.lon.ToString());
-            return new Forecast
+            WeatherResponse weatherData;
             {
-                City = location?.City,
-                Region = location?.Region,
-                Country = location?.Country,
-                ForecastChunks = data.list!.Select(chunk => new Forecast.ForecastChunk
+                HttpResponseMessage res = await client.GetAsync(string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}{1}{2}&appid={3}&units=metric", City, Region != null ? "," + Region : "", Country != null ? "," + Country : "", API_KEY));
+                if (!res.IsSuccessStatusCode) return null;
+                string json = await res.Content.ReadAsStringAsync();
+                JObject jObject = JObject.Parse(json);
+                weatherData = jObject.ToObject<WeatherResponse>()!;
+            }
+
+            if (Region == null || Country == null) location = (await GetLocationAsync(weatherData.coord!.lat.ToString(), weatherData.coord.lon.ToString()))!;
+            else location = new Location
+            {
+                City = City,
+                Region = Region,
+                Country = Country,
+                Latitude = weatherData.coord!.lat,
+                Longitude = weatherData.coord.lon
+            };
+            ForecastResponse forecastData;
+            {
+                HttpResponseMessage res = await client.GetAsync(string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid={2}&units=metric", location.Latitude, location.Longitude, API_KEY));
+                if (!res.IsSuccessStatusCode) return null;
+                string json = await res.Content.ReadAsStringAsync();
+                JObject jObject = JObject.Parse(json);
+                forecastData = jObject.ToObject<ForecastResponse>()!;
+            }
+
+            Forecast forecast = new Forecast
+            {
+                LocationData = location,
+                ForecastChunks = forecastData.list!.Select(x => new Forecast.ForecastChunk
                 {
-                    Day = DateTime.Parse(chunk.dt_txt!).DayOfWeek.ToString(),
-                    Date = chunk.dt_txt,
-                    Temperature = (int)chunk.main!.temp,
-                    High = (int)chunk.main.temp_max,
-                    Low = (int)chunk.main.temp_min,
-                    Description = chunk.weather![0].description!.ToString(),
-                }).ToList(),
-
+                    Day = DateTime.Parse(x.dtTxt!).DayOfWeek.ToString(),
+                    Temperature = (int)x.main!.temp,
+                    High = (int)x.main.tempMax,
+                    Low = (int)x.main.tempMin,
+                    Description = x.weather![0].description!.ToString(),
+                    Humidity = x.main.humidity,
+                    WindSpeed = x.wind!.speed,
+                    WindDirection = x.wind.deg,
+                    WindGust = x.wind.gust,
+                    Cloudiness = x.clouds!.all,
+                    Sunrise = forecastData.city!.sunrise,
+                    Sunset = forecastData.city.sunset,
+                    Icon = x.weather[0].icon!.ToString(),
+                    Timezone = weatherData.timezone,
+                    Dt = x.dt,
+                    ID = weatherData.id,
+                    Name = weatherData.name,
+                    Cod = weatherData.cod,
+                    SeaLevel = x.main.seaLevel,
+                    GrndLevel = x.main.grndLevel,
+                    Pressure = x.main.pressure,
+                    FeelsLike = x.main.feelsLike,
+                    Rain3h = x.rain!._3h,
+                }).ToList()
             };
+
+            Weather weather = new Weather
+            {
+                LocationData = location,
+                Temperature = (int)weatherData.main!.temp,
+                High = (int)weatherData.main.tempMax,
+                Low = (int)weatherData.main.tempMin,
+                Description = weatherData.weather![0].description!.ToString(),
+                Humidity = weatherData.main.humidity,
+                WindSpeed = weatherData.wind!.speed,
+                WindDirection = weatherData.wind.deg,
+                WindGust = weatherData.wind.gust,
+                Cloudiness = weatherData.clouds!.all,
+                Sunrise = weatherData.sys!.sunrise,
+                Sunset = weatherData.sys.sunset,
+                Icon = weatherData.weather[0].icon!.ToString(),
+                Timezone = weatherData.timezone,
+                Dt = weatherData.dt,
+                ID = weatherData.id,
+                Name = weatherData.name,
+                Cod = weatherData.cod,
+                SeaLevel = weatherData.main.seaLevel,
+                GrndLevel = weatherData.main.grndLevel,
+                Pressure = weatherData.main.pressure,
+                FeelsLike = weatherData.main.feelsLike,
+                Rain1h = weatherData.rain?._1h,
+                Forecast = forecast
+            };
+            return weather;
         }
     }
 }

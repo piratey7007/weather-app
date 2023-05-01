@@ -37,7 +37,7 @@ export default function Nav() {
 
   async function handleClick(
     e: React.MouseEvent<HTMLAnchorElement>,
-    direction?: "left" | "right",
+    direction?: "left" | "right"
   ) {
     e.preventDefault();
     setDirection(direction);

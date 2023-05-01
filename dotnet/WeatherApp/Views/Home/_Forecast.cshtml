@@ -2,9 +2,9 @@
 
 @if (Model != null)
 {
-    if (Model.City != null && Model.Region != null && Model.Country != null)
+    if (Model.LocationData!.City != null && Model.LocationData.Region != null && Model.LocationData.Country != null)
     {
-        <h2>@Model.City, @Model.Region, @Model.Country</h2>
+        <h2>@Model.LocationData.City, @Model.LocationData.Region, @Model.LocationData.Country</h2>
     }
     string j = "";
     for (int i = 0; i < Model.ForecastChunks.Count; i++)
@@ -20,9 +20,10 @@
         else if (j != chunk.Day)
         {
             <h3>
-                @chunk.Day
-            </h3>
-            <p>@chunk.Date, @chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks, chunk.Day)</p>
+    @chunk.Day
+</h3>
+            <p>@chunk.Date, @chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks,
+    chunk.Day)</p>
             <img src="/Images/@Model.GetIconUrl(Model.ForecastChunks, chunk.Day)" />
             j = chunk.Day;
         }

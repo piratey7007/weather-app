@@ -17,17 +17,15 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetWeather(string city)
+    public async Task<IActionResult> GetWeather(Location location)
     {
-        var weather = await _weatherService.GetWeatherAsync(city);
-        return PartialView("_Weather", weather);
+        return PartialView("_Weather", await _weatherService.GetLocationWeatherAsync(location));
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetForecast(string city)
+    public async Task<IActionResult> GetForecast(Location location)
     {
-        var forecast = await _weatherService.GetForecastAsync(city);
-        return PartialView("_Forecast", forecast);
+        return PartialView("_Forecast", (await _weatherService.GetLocationWeatherAsync(location))?.Forecast);
     }
 
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model WeatherApp.Models.Forecast
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,19 +10,13 @@
     <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
 </head>
 
-<body>
-    @await Html.PartialAsync("_Nav")
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body class="flex gap-4 justify-between">
+    <div>
+        @await Html.PartialAsync("_Nav")
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - WeatherApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <main>
+        @RenderBody()
+    </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

@@ -2,9 +2,9 @@
 
 @if (Model != null)
 {
-    if (Model.City != null && Model.Region != null && Model.Country != null)
+    if (Model.LocationData?.City != null && Model.LocationData.Region != null && Model.LocationData.Country != null)
     {
-        <h2>@Model.City, @Model.Region, @Model.Country</h2>
+        <h2>@Model.LocationData.City, @Model.LocationData.Region, @Model.LocationData.Country</h2>
     }
     <p>Temperature: @Model.Temperature °C</p>
     <p>Description: @Model.Description</p>

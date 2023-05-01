@@ -1,13 +1,42 @@
 using Newtonsoft.Json;
 
 namespace WeatherApp.Models;
+
+public class WeatherLocations
+{
+    public WeatherLocations(Dictionary<LocationBasic, Weather> locations)
+    {
+        this.Locations = locations;
+    }
+    public Dictionary<LocationBasic, Weather> Locations { get; set; }
+}
+
 public class Weather
 {
-    public string? City { get; set; }
-    public string? Region { get; set; }
-    public string? Country { get; set; }
+    public Location? LocationData { get; set; }
+    public string? Icon { get; set; }
     public string? Description { get; set; }
-    public string? Temperature { get; set; }
+    public double? Temperature { get; set; }
+    public double? FeelsLike { get; set; }
+    public double? High { get; set; }
+    public double? Low { get; set; }
+    public double? Humidity { get; set; }
+    public double? Pressure { get; set; }
+    public double? WindSpeed { get; set; }
+    public double? WindDirection { get; set; }
+    public double? Cloudiness { get; set; }
+    public double? Sunrise { get; set; }
+    public double? Sunset { get; set; }
+    public double? Timezone { get; set; }
+    public double? ID { get; set; }
+    public string? Name { get; set; }
+    public double? Cod { get; set; }
+    public double? Dt { get; set; }
+    public double? SeaLevel { get; set; }
+    public double? GrndLevel { get; set; }
+    public double? WindGust { get; set; }
+    public double? Rain1h { get; set; }
+    public Forecast Forecast { get; set; }
 }
 
 public class WeatherResponse
@@ -42,9 +71,12 @@ public class WeatherResponse
     public record Main
     {
         public double temp { get; set; }
-        public double feels_like { get; set; }
-        public double temp_min { get; set; }
-        public double temp_max { get; set; }
+        [JsonProperty("feels_like")]
+        public double feelsLike { get; set; }
+        [JsonProperty("temp_min")]
+        public double tempMin { get; set; }
+        [JsonProperty("temp_max")]
+        public double tempMax { get; set; }
         public int pressure { get; set; }
         public int humidity { get; set; }
         [JsonProperty("sea_level")]
