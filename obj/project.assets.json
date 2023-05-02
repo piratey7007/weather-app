@@ -60,11 +60,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mx/dev/weather-app/dotnet/WeatherApp/WeatherApp.csproj",
+      "projectUniqueName": "/Users/mx/dev/weather-app/WeatherApp.csproj",
       "projectName": "WeatherApp",
-      "projectPath": "/Users/mx/dev/weather-app/dotnet/WeatherApp/WeatherApp.csproj",
+      "projectPath": "/Users/mx/dev/weather-app/WeatherApp.csproj",
       "packagesPath": "/Users/mx/.nuget/packages/",
-      "outputPath": "/Users/mx/dev/weather-app/dotnet/WeatherApp/obj/",
+      "outputPath": "/Users/mx/dev/weather-app/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mx/.nuget/NuGet/NuGet.Config"

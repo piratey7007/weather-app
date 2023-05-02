@@ -81,9 +81,10 @@ public class Forecast
         }
         string icon = "";
         if (overcast) icon = "overcast";
-        else if (few) icon = "few";
         else if (scattered) icon = "scattered";
-        var chunkTime = DateTime.Parse(forecastChunks[0].Date!).TimeOfDay;
+        else if (few) icon = "few";
+        // Convert dt to local time with DateTime
+        TimeSpan chunkTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(forecastChunks[0].Dt).ToLocalTime().TimeOfDay;
         if (!overcast && !scattered)
         {
             if (chunkTime.Hours >= 18 || chunkTime.Hours <= 6) icon += "_night";
@@ -93,6 +94,7 @@ public class Forecast
         else if (snow) icon += "_snow";
         else if (rain) icon += "_rain";
         if (icon.StartsWith("_")) icon = icon.Substring(1);
+        if (icon.EndsWith("rain") && !icon.StartsWith("few") && !icon.StartsWith("overcast") && !icon.StartsWith("scattered")) icon = "few_" + icon;
         return icon + ".png";
     }
 }

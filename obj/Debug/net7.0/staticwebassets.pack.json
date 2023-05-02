@@ -1,123 +1,123 @@
 {
   "Files": [
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/clear_day.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/clear_day.png",
       "PackagePath": "staticwebassets/Images/clear_day.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/clear_night.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/clear_night.png",
       "PackagePath": "staticwebassets/Images/clear_night.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_day.png",
       "PackagePath": "staticwebassets/Images/few_day.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day_rain.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_day_rain.png",
       "PackagePath": "staticwebassets/Images/few_day_rain.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_day_thunder.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_day_thunder.png",
       "PackagePath": "staticwebassets/Images/few_day_thunder.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_night.png",
       "PackagePath": "staticwebassets/Images/few_night.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night_rain.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_night_rain.png",
       "PackagePath": "staticwebassets/Images/few_night_rain.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/few_night_thunder.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/few_night_thunder.png",
       "PackagePath": "staticwebassets/Images/few_night_thunder.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/overcast.png",
       "PackagePath": "staticwebassets/Images/overcast.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast_rain.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/overcast_rain.png",
       "PackagePath": "staticwebassets/Images/overcast_rain.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/overcast_thunder.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/overcast_thunder.png",
       "PackagePath": "staticwebassets/Images/overcast_thunder.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/scattered.png",
       "PackagePath": "staticwebassets/Images/scattered.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered_rain.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/scattered_rain.png",
       "PackagePath": "staticwebassets/Images/scattered_rain.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/Images/scattered_thunder.png",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/Images/scattered_thunder.png",
       "PackagePath": "staticwebassets/Images/scattered_thunder.png"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/css/output.css",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/css/output.css",
       "PackagePath": "staticwebassets/css/output.css"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/css/site.css",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/favicon.ico",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/js/site.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation/LICENSE.md",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation/LICENSE.md",
       "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery/LICENSE.txt",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery/dist/jquery.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery/dist/jquery.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery/dist/jquery.min.js",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery/dist/jquery.min.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
     },
     {
-      "Id": "/Users/mx/dev/weather-app/dotnet/WeatherApp/wwwroot/lib/jquery/dist/jquery.min.map",
+      "Id": "/Users/mx/dev/weather-app/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {

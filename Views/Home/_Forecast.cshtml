@@ -13,16 +13,17 @@
         string today = DateTime.Now.DayOfWeek.ToString();
         if (chunk.Day == today)
         {
-            <h3></h3>
-            <p>@chunk.Date, @chunk.Description, @chunk.Temperature</p>
+            <h3>Today</h3>
+            <p>@chunk.Description, @chunk.Temperature</p>
             j = today;
         }
         else if (j != chunk.Day)
         {
             <h3>
-    @chunk.Day
+    @(new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(chunk.Dt).ToLocalTime().DayOfWeek.ToString());
+
 </h3>
-            <p>@chunk.Date, @chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks,
+            <p>@chunk.Description, @Model.GetHigh(Model.ForecastChunks, chunk.Day), @Model.GetLow(Model.ForecastChunks,
     chunk.Day)</p>
             <img src="/Images/@Model.GetIconUrl(Model.ForecastChunks, chunk.Day)" />
             j = chunk.Day;
