@@ -57,7 +57,7 @@ public class Forecast
         return highest;
     }
 
-    public string GetIconUrl(List<ForecastChunk> forecastChunks, string day)
+    public string GetIconUrl(List<ForecastChunk> forecastChunks, string? day = null)
     {
         bool overcast = false;
         bool few = false;
@@ -68,7 +68,7 @@ public class Forecast
         for (int i = 0; i < forecastChunks.Count; i++)
         {
             ForecastChunk forecastChunk = forecastChunks[i];
-            if (forecastChunk.Day == day)
+            if (forecastChunk.Day == day || day == null)
             {
                 string description = forecastChunk.Description!;
                 if (description.Contains("overcast")) overcast = true;

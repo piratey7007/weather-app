@@ -1,0 +1,28 @@
+@* @using WeatherApp.Models
+    @model WeatherApp.Models.WeatherLocations
+
+    <div class="flex flex-col gap-4">
+    @foreach (var key in Model.Locations.Keys)
+    {
+    var location = Model.Locations[key];
+    <div class="flex justify-between">
+    <div class="flex flex-col justify-between">
+    <h3>@location.Name</h3>
+    <div class="flex gap-4">
+    <span>H</span>
+    <span>@location.High</span>
+    <span>L</span>
+    <span>@location.Low</span>
+    </div>
+    <p>@location.Description</p>
+    </div>
+    <div class="flex justify-center">
+    <img src="@location.Forecast.GetIconUrl(location.Forecast.ForecastChunks)" />
+    <h2>
+    @location.Temperature
+    </h2>
+    <span>°F</span>
+    </div>
+    </div>
+    }
+    </div> *@
